@@ -6,7 +6,7 @@
 /*   By: rde-oliv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 16:51:18 by rde-oliv          #+#    #+#             */
-/*   Updated: 2020/08/30 15:20:23 by rde-oliv         ###   ########.fr       */
+/*   Updated: 2020/08/30 16:23:35 by rde-oliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
+#include <fcntl.h>
 
 void	strlen_test(char *str)
 {
@@ -82,6 +83,31 @@ void	write_test(char *str)
 	printf("-----------------------------------------\n");
 }
 
+void	write_file_test(char *str)
+{
+	int fd;
+	int fd2;
+
+	fd = open("t_write.txt", O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR);
+	fd2 = open("t_ft_write.txt", O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR);
+	printf("#########################################\n");
+	printf("############# ft_write file #############\n");
+	printf("#########################################\n");
+	printf("string    = \"%s\"\n", str);
+	printf("-----------------------------------------\n");
+	write(fd, "write     = \"", 13);
+	write(fd, str, ft_strlen(str));
+	write(fd, "\"\n", 2);
+	printf("write errno    = %d\n", errno);
+	write(fd2, "ft_write  = \"", 13);
+	write(fd2, str, ft_strlen(str));
+	write(fd2, "\"\n", 2);
+	printf("ft_write errno = %d\n", errno);
+	printf("-----------------------------------------\n");
+	close(fd);
+	close(fd2);
+}
+
 void	read_test(void)
 {
 	char	buffer[999];
@@ -132,6 +158,7 @@ int		main(void)
 	strcpy_test(str, str2);
 	strcmp_test(str, "abcdf");
 	write_test(str);
+	write_file_test(str);
 	read_test();
 	strdup_test(str);
 	return (0);
