@@ -4,7 +4,7 @@ segment .text
 
 ft_write:
 	mov r8, rdx
-	mov rax, 0x2000004
+	mov rax, 1
 	syscall
 	cmp rax, 0
 	jl .error

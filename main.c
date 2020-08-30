@@ -6,7 +6,7 @@
 /*   By: rde-oliv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 16:51:18 by rde-oliv          #+#    #+#             */
-/*   Updated: 2020/08/30 16:23:35 by rde-oliv         ###   ########.fr       */
+/*   Updated: 2020/08/30 16:40:46 by rde-oliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void	write_test(char *str)
 	write(1, str, ft_strlen(str));
 	write(1, "\"\n", 2);
 	printf("errno = %d\n", errno);
-	write(1, "ft_write  = \"", 13);
-	write(1, str, ft_strlen(str));
-	write(1, "\"\n", 2);
+	ft_write(1, "ft_write  = \"", 13);
+	ft_write(1, str, ft_strlen(str));
+	ft_write(1, "\"\n", 2);
 	printf("errno = %d\n", errno);
 	printf("-----------------------------------------\n");
 }
@@ -99,9 +99,9 @@ void	write_file_test(char *str)
 	write(fd, str, ft_strlen(str));
 	write(fd, "\"\n", 2);
 	printf("write errno    = %d\n", errno);
-	write(fd2, "ft_write  = \"", 13);
-	write(fd2, str, ft_strlen(str));
-	write(fd2, "\"\n", 2);
+	ft_write(fd2, "ft_write  = \"", 13);
+	ft_write(fd2, str, ft_strlen(str));
+	ft_write(fd2, "\"\n", 2);
 	printf("ft_write errno = %d\n", errno);
 	printf("-----------------------------------------\n");
 	close(fd);
