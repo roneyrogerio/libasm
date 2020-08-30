@@ -6,7 +6,7 @@
 /*   By: rde-oliv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 16:51:18 by rde-oliv          #+#    #+#             */
-/*   Updated: 2020/08/30 16:40:46 by rde-oliv         ###   ########.fr       */
+/*   Updated: 2020/08/30 17:47:22 by rde-oliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,10 @@ void	write_test(char *str)
 
 void	write_file_test(char *str)
 {
-	int fd;
-	int fd2;
+	int	fd;
+	int	ret;
 
-	fd = open("t_write.txt", O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR);
-	fd2 = open("t_ft_write.txt", O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR);
+	fd = open("t_ft_write.txt", O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR);
 	printf("#########################################\n");
 	printf("############# ft_write file #############\n");
 	printf("#########################################\n");
@@ -97,15 +96,17 @@ void	write_file_test(char *str)
 	printf("-----------------------------------------\n");
 	write(fd, "write     = \"", 13);
 	write(fd, str, ft_strlen(str));
-	write(fd, "\"\n", 2);
+	ret = write(fd, "\"\n", 2);
 	printf("write errno    = %d\n", errno);
-	ft_write(fd2, "ft_write  = \"", 13);
-	ft_write(fd2, str, ft_strlen(str));
-	ft_write(fd2, "\"\n", 2);
+	printf("write return   = %d\n", ret);
+	errno = 0;
+	ft_write(fd, "ft_write  = \"", 13);
+	ft_write(fd, str, ft_strlen(str));
+	ret = ft_write(fd, "\"\n", 2);
 	printf("ft_write errno = %d\n", errno);
+	printf("ft_write return= %d\n", ret);
 	printf("-----------------------------------------\n");
 	close(fd);
-	close(fd2);
 }
 
 void	read_test(void)
