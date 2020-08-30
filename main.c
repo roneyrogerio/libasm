@@ -6,7 +6,7 @@
 /*   By: rde-oliv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 16:51:18 by rde-oliv          #+#    #+#             */
-/*   Updated: 2020/08/30 17:47:22 by rde-oliv         ###   ########.fr       */
+/*   Updated: 2020/08/30 19:41:23 by rde-oliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,33 @@ void	read_test(void)
 	printf("-----------------------------------------\n");
 }
 
+void	read_file_test(void)
+{
+	int		fd;
+	int		ret;
+	char	buffer[11];
+
+	printf("#########################################\n");
+	printf("############## ft_read file #############\n");
+	printf("#########################################\n");
+	printf("-----------------------------------------\n");
+	fd = open("t_ft_write.txt", O_RDWR);
+	ret = read(fd, buffer, 10);
+	buffer[10] = '\0';
+	printf("read           = \"%s\", errno = %d\n", buffer, errno);
+	printf("read return    = %d\n", ret);
+	close(fd);
+	bzero(buffer, 10);
+	errno = 0;
+	fd = open("t_ft_write.txt", O_RDWR);
+	ret = read(fd, buffer, 10);
+	printf("ft_read        = \"%s\", errno = %d\n", buffer, errno);
+	printf("ft_read return = %d\n", ret);
+	close(fd);
+	printf("-----------------------------------------\n");
+}
+
+
 void	strdup_test(char *str)
 {
 	char	*ptr;
@@ -161,6 +188,7 @@ int		main(void)
 	write_test(str);
 	write_file_test(str);
 	read_test();
+	read_file_test();
 	strdup_test(str);
 	return (0);
 }
